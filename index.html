@@ -35,7 +35,7 @@
     }
     header h1{
       margin:0;
-      font-size:20px;
+      font-size:24px;
       letter-spacing:0.6px;
     }
     header p{
@@ -49,7 +49,7 @@
       display:grid;
       grid-template-columns: repeat(3, 1fr);
       gap:10px;
-      max-width:900px;
+      max-width:700px;
       margin: 10px auto 20px;
     }
 
@@ -73,27 +73,40 @@
     .pad:active,
     .pad.pressed {
       transform: translateY(2px) scale(0.995);
-      box-shadow: 0 3px 9px rgba(2,6,23,0.7), inset 0 -6px 12px rgba(0,0,0,0.35);
+      box-shadow:
+        0 3px 9px rgba(2,6,23,0.7),
+        inset 0 -6px 12px rgba(0,0,0,0.35);
+      border-color: var(--accent);
     }
 
     /* content inside square */
     .pad .content {
       position:absolute;
-      inset:12px;
+      inset:0;
+      width:100%;
+      height:100%;
       display:flex;
       flex-direction:column;
-      align-items:center;
-      justify-content:center;
-      gap:6px;
-      text-align:center;
+      align-items:flex-start;
+      justify-content:flex-start;
       pointer-events:none; /* clickable area is the button itself */
     }
 
     .pad .label {
-      font-size:14px;
+      font-size:clamp(0.75rem, 3vw, 2rem);
       font-weight:600;
       color: #fff;
       text-shadow: 0 1px 0 rgba(0,0,0,0.6);
+      margin-top:14px;
+      margin-left:16px;
+      margin-bottom:0;
+      margin-right:0;
+      text-align:left;
+      align-self:flex-start;
+      line-height:1.1;
+      word-break:break-word;
+      width:calc(100% - 32px);
+      white-space:normal;
     }
 
     /* responsive tweaks for larger screens */
@@ -119,7 +132,7 @@
 </head>
 <body>
   <header>
-    <h1>Natale a Trinquelli</h1>
+    <h1>Suonini</h1>
   </header>
 
   <main>
