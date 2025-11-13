@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Natale a Trinquelli</title>
+  <style>
+    :root{
+      --bg:#0b1020;
+      --card:#0f1724;
+      --accent:#ffd166;
+      --accent-2:#ef476f;
+      --muted:#9aa7bf;
+      --glass: rgba(255,255,255,0.04);
+    }
+
+    html,body{
+      height:100%;
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.08)),
+        radial-gradient(600px 400px at 10% 10%, rgba(239,71,111,0.06), transparent 10%),
+        var(--bg);
+      color: #e6eef8;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding:16px;
+      box-sizing:border-box;
+    }
+
+    header{
+      text-align:center;
+      margin-bottom:48px;
+    }
+    header h1{
+      margin:0;
+      font-size:20px;
+      letter-spacing:0.6px;
+    }
+    header p{
+      margin:6px 0 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    /* Grid container: mobile-first */
+    .grid {
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:10px;
+      max-width:900px;
+      margin: 10px auto 20px;
+    }
+
+    /* Big square buttons */
+    .pad {
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.12));
+      border-radius:14px;
+      padding:0;
+      border: 1px solid rgba(255,255,255,0.04);
+      height: 0;
+      padding-bottom: 100%; /* aspect ratio 1:1 -> square */
+      position:relative;
+      overflow:hidden;
+      -webkit-user-select:none;
+      user-select:none;
+      box-shadow: 0 6px 18px rgba(2,6,23,0.6), inset 0 -4px 8px rgba(255,255,255,0.02);
+      transition: transform 120ms ease, box-shadow 120ms ease;
+      touch-action: manipulation;
+    }
+
+    .pad:active,
+    .pad.pressed {
+      transform: translateY(2px) scale(0.995);
+      box-shadow: 0 3px 9px rgba(2,6,23,0.7), inset 0 -6px 12px rgba(0,0,0,0.35);
+    }
+
+    /* content inside square */
+    .pad .content {
+      position:absolute;
+      inset:12px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:6px;
+      text-align:center;
+      pointer-events:none; /* clickable area is the button itself */
+    }
+
+    .pad .label {
+      font-size:14px;
+      font-weight:600;
+      color: #fff;
+      text-shadow: 0 1px 0 rgba(0,0,0,0.6);
+    }
+
+    /* responsive tweaks for larger screens */
+    @media (min-width:720px){
+      header h1{ font-size:24px; }
+      .grid { gap:14px; }
+    }
+
+    footer {
+      color:var(--muted);
+      font-size:12px;
+      text-align:center;
+      margin-top:6px;
+    }
+
+    /* subtle focus style for keyboard accessibility */
+    .pad:focus {
+      outline: 3px solid rgba(255,209,102,0.12);
+      outline-offset: 2px;
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Natale a Trinquelli</h1>
+  </header>
+
+  <main>
+    <!-- 3x3 grid of pads. Each button has data-sound attribute pointing to the ID of the <audio> element -->
+    <div class="grid" role="grid" aria-label="Pad grid">
+      <button class="pad" data-audio="s1" aria-label="Ma che è sta cafonata">
+        <div class="content">
+          <div class="label">Ma che è sta cafonata</div>
+        </div>
+      </button>
+
+      <button class="pad" data-audio="s2" aria-label="LE VELINE">
+        <div class="content">
+          <div class="label">LE VELINE</div>
+        </div>
+      </button>
+
+      <button class="pad" data-audio="s3" aria-label="Mamma mia comme sto">
+        <div class="content">
+          <div class="label">Mamma mia comme sto</div>
+        </div>
+      </button>
+
+      <!-- <button class="pad" data-audio="s4" aria-label="Campana lunga">
+        <div class="content">
+          <div class="label">Campana Lunga</div>
+        </div>
+      </button>
+
+      <button class="pad" data-audio="s5" aria-label="Sleigh">
+        <div class="content">
+          <div class="label">Sleigh</div>
+        </div>
+      </button>
+
+      <button class="pad" data-audio="s6" aria-label="Voci">
+        <div class="content">
+          <div class="label">Voci</div>
+        </div>
+      </button>
+
+      <button class="pad" data-audio="s7" aria-label="Ritmo">
+        <div class="content">
+          <div class="label">Ritmo</div>
+        </div>
+      </button>
+
+      <button class="pad" data-audio="s8" aria-label="Coro">
+        <div class="content">
+          <div class="label">Coro</div>
+        </div>
+      </button>
+
+      <button class="pad" data-audio="s9" aria-label="Finale">
+        <div class="content">
+          <div class="label">Finale</div>
+        </div>
+      </button> -->
+    </div>
+
+    <!-- Hidden audio elements. Preload=auto to reduce latency.
+         Replace src with your audio file paths (local or remote URLs).
+         Filenames suggerite: /sounds/campanella1.mp3, /sounds/jingle.mp3, ... -->
+    <div style="display:none" aria-hidden="true">
+      <audio id="s1" preload="auto"><source src="sounds/cafonata.mp3" type="audio/mpeg"></audio>
+      <audio id="s2" preload="auto"><source src="sounds/veline.mp3" type="audio/mpeg"></audio>
+      <audio id="s3" preload="auto"><source src="sounds/comesto.mp3" type="audio/mpeg"></audio>
+      <audio id="s4" preload="auto"><source src="sounds/cafonata.mp3" type="audio/mpeg"></audio>
+      <audio id="s5" preload="auto"><source src="sounds/cafonata.mp3" type="audio/mpeg"></audio>
+      <audio id="s6" preload="auto"><source src="sounds/cafonata.mp3" type="audio/mpeg"></audio>
+      <audio id="s7" preload="auto"><source src="sounds/cafonata.mp3" type="audio/mpeg"></audio>
+      <audio id="s8" preload="auto"><source src="sounds/cafonata.mp3" type="audio/mpeg"></audio>
+      <audio id="s9" preload="auto"><source src="sounds/cafonata.mp3" type="audio/mpeg"></audio>
+    </div>
+  </main>
+
+  <script>
+    // MINIMO JS: add event listeners to buttons to play audio and add a playing visual.
+    (function(){
+      const pads = Array.from(document.querySelectorAll('.pad'));
+
+      // Utility: play given audio element by id, reset time so it can re-trigger rapidly
+      function playById(id, padEl) {
+        const audio = document.getElementById(id);
+        if (!audio) return;
+        try {
+          audio.pause();
+          audio.currentTime = 0;
+        } catch(e){}
+        // play returns a promise; we don't need to await, but handle rejection silently
+        audio.play().catch(()=>{ /* autoplay/gesture blocked on some browsers */ });
+
+        // visual feedback
+        padEl.classList.add('playing', 'pressed');
+        // remove pressed quickly to show tap; keep playing class until audio ends
+        setTimeout(()=> padEl.classList.remove('pressed'), 120);
+        // when audio ends remove playing (works when user has valid audio)
+        audio.onended = () => padEl.classList.remove('playing');
+      }
+
+      // Attach handlers (touch + click)
+      pads.forEach((pad, idx) => {
+        const aid = pad.getAttribute('data-audio');
+        if (!aid) return;
+
+        // click / tap
+        pad.addEventListener('click', (e) => {
+          playById(aid, pad);
+        });
+
+        // support keyboard numbers 1..9
+        // We'll attach global keydown once
+      });
+
+      // Keyboard mapping: keys 1..9 trigger pads 0..8
+      window.addEventListener('keydown', (ev) => {
+        if (ev.repeat) return;
+        const key = ev.key;
+        if (key >= '1' && key <= '9') {
+          const i = parseInt(key,10) - 1;
+          const pad = pads[i];
+          if (pad) {
+            const aid = pad.getAttribute('data-audio');
+            playById(aid, pad);
+            // flash focus for accessibility
+            pad.focus({preventScroll:true});
+          }
+        }
+      });
+
+      // optional: small pre-warm to reduce first-play lag on some devices (touch required on mobile)
+      // We'll do a gentle gesture when user first taps any pad: this script cannot simulate a user gesture.
+      // So we leave preload="auto" on audio elements and rely on user's first tap.
+
+    })();
+  </script>
+</body>
+</html>
